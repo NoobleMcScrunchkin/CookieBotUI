@@ -1,5 +1,5 @@
 <div
-    class="bg-zinc-200 dark:bg-zinc-800 border-r-2 border-zinc-400 dark:border-zinc-600 h-full w-56 py-4 px-3 text-zinc-700 dark:text-zinc-300">
+    class="bg-zinc-200 dark:bg-zinc-800 border-r-2 border-zinc-400 dark:border-zinc-600 h-screen overflow-y-auto w-56 py-4 px-3 text-zinc-700 dark:text-zinc-300">
     <a href="{{ route('guild.settings', ['guild' => $guild['id']]) }}"
         class="w-full py-2 block text-center bg-zinc-300 dark:bg-zinc-700 rounded"><i
             class="fa-solid fa-gear mr-2"></i><strong>Settings</strong></a>

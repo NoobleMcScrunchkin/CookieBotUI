@@ -1,5 +1,5 @@
 <div
-    class="bg-zinc-200 dark:bg-zinc-800 border-l-2 border-zinc-400 dark:border-zinc-600 h-full w-56 py-4 px-3 dark:text-zinc-300 text-zinc-700">
+    class="bg-zinc-200 dark:bg-zinc-800 border-l-2 border-zinc-400 dark:border-zinc-600 h-screen overflow-y-auto w-56 py-4 px-3 dark:text-zinc-300 text-zinc-700">
     <ul>
         <li class="w-full flex flex-row mb-2 text-zinc-700 dark:text-zinc-300">
             <strong>Members - {{ count($guild['members']) }}</strong>
