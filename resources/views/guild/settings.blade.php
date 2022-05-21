@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="flex flex-row w-full h-full">
+    <div class="flex flex-row w-full h-screen overflow-y-auto">
         @include('layouts.guild-channels')
         <div class="h-full flex-grow py-4 px-3">
             <div class="mb-4">
