@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Services\BotInterface;
+use Illuminate\Http\Request;
 
 class APIController extends Controller {
-    public function test() {
-        return (new BotInterface())->getGuilds();
-    }
-
-    public function test2() {
-        return (new BotInterface())->sendMessage('725811866907181096', '775153603538190346', 'Testing');
+    public function sendMsg(Request $request) {
+        $guild = $request->input('guild');
+        $channel = $request->input('channel');
+        $message = $request->input('message');
+        return BotInterface::sendMessage($guild, $channel, $message);
     }
 }

@@ -10,7 +10,7 @@ class BotInterface
     {
     }
 
-    public function getGuilds()
+    public static function getGuilds()
     {
         $response = Http::get(config('app.api_base_url') . 'guilds');
         $res = $response->json();
@@ -23,7 +23,20 @@ class BotInterface
         return $guilds;
     }
 
-    public function sendMessage($guild, $channel, $message)
+    public static function getGuild($guildid)
+    {
+        $response = Http::get(config('app.api_base_url') . 'guild', ['guildid' => $guildid]);
+        $res = $response->json();
+
+        if (!$res['success']) {
+            return false;
+        }
+
+        $guild = $res['guild'];
+        return $guild;
+    }
+
+    public static function sendMessage($guild, $channel, $message)
     {
         $response = Http::post(config('app.api_base_url') . 'send-msg', [
             'guild' => $guild,
@@ -33,13 +46,13 @@ class BotInterface
         $res = $response->json();
 
         if (!$res['success']) {
-            return $res['success'];
+            return false;
         }
 
         return true;
     }
 
-    public function eval($command)
+    public static function eval($command)
     {
         $response = Http::post(config('app.api_base_url') . 'eval', [
             'command' => $command,

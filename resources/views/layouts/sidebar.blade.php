@@ -1,12 +1,12 @@
 <aside
-    class="w-full sm:w-16 sm:min-h-screen sticky bottom-0 sm:top-0 sm:h-full border-t-2 sm:border-t-0 sm:border-r-2 border-zinc-300 dark:border-zinc-700"
+    class="w-16 min-h-screen sticky top-0 h-full border-r-2 border-zinc-400 dark:border-zinc-600"
     aria-label="Sidebar">
     <div
-        class="overflow-y-auto py-4 px-3 bg-zinc-50 rounded rounded-tl-none rounded-bl-none dark:bg-zinc-800 sm:min-h-screen">
-        <ul class="sm:space-y-2 flex sm:block justify-between mx-8 sm:mx-0">
-            <li class="sm:float-none float-left">
+        class="overflow-y-auto py-4 px-3 bg-zinc-100 rounded rounded-tl-none rounded-bl-none dark:bg-zinc-900 min-h-screen">
+        <ul class="space-y-2 block">
+            <li class="float-none">
                 <a href="{{ route('index') }}"
-                    class="flex items-center p-2 text-base font-normal @if (Route::is('index')) text-zinc-900 dark:text-zinc-100  @else text-zinc-500 @endif rounded-lg hover:text-zinc-900 hover:bg-zinc-100 dark:hover:text-zinc-100 dark:hover:bg-zinc-700">
+                    class="flex items-center p-2 text-base font-normal @if (Route::is('index')) text-zinc-900 dark:text-zinc-100 bg-zinc-400 dark:bg-zinc-600 @else text-zinc-500 @endif rounded-lg dark:bg-zinc-700 bg-zinc-300 text-zinc-800 dark:text-zinc-200 hover:text-zinc-900 hover:bg-zinc-400 dark:hover:text-zinc-100 dark:hover:bg-zinc-600">
                     <svg class="flex-shrink-0 w-6 h-6 transition duration-75" xmlns="http://www.w3.org/2000/svg"
                         fill="currentColor" viewBox="0 0 576 512">
                         <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
@@ -16,43 +16,23 @@
                     </svg>
                 </a>
             </li>
+            @foreach (AppHelper::getGuilds() as $sideBarGuild)
+                <li class="float-none">
+                    <a href="{{ route('guild.settings', ['guild' => $sideBarGuild['id']]) }}"
+                        class="flex items-center p-1 text-base font-normal @if (Route::is('guild.settings') && $sideBarGuild['id'] == Request::segment(1)) text-zinc-900 dark:text-zinc-100 bg-zinc-400 dark:bg-zinc-600 @endif rounded-lg dark:bg-zinc-700 bg-zinc-300 text-zinc-800 dark:text-zinc-200 hover:text-zinc-900 hover:bg-zinc-400 dark:hover:text-zinc-100 dark:hover:bg-zinc-600">
+                        <div class="flex-shrink-0 w-full h-full transition duration-75">
+                            @if ($sideBarGuild['icon'] != null)
+                                <img src="{{ $sideBarGuild['icon'] }}" alt="{{ $sideBarGuild['name'] }}"
+                                    class="w-full h-full rounded-lg">
+                            @else
+                                <div class="w-full h-full rounded-lg text-center text-xl flex justify-center align-center flex-col">
+                                    <strong>{{ AppHelper::acronym($sideBarGuild['name']) }}</strong>
+                                </div>
+                            @endif
+                        </div>
+                    </a>
+                </li>
+            @endforeach
         </ul>
     </div>
 </aside>
-<div id="body-shadow" class="opacity-50 bg-black fixed top-0 left-0 w-full h-full z-40 hidden"></div>
-<div id="search-field"
-    class="hidden fixed top-16 sm:mx-0 z-50 sm:bottom-auto sm:top-14 sm:w-96 left-2 right-2 sm:left-16 p-2 bg-zinc-50 dark:bg-zinc-800 dark:text-white rounded-md sm:rounded-bl-none sm:rounded-tl-none border-2 sm:border-l-0 border-zinc-300 dark:border-zinc-700">
-    <input
-        class="w-full bg-zinc-200 appearance-none dark:bg-zinc-700 rounded border border-zinc-200 dark:border-zinc-700"
-        type="text">
-</div>
-<div id="notification-field"
-    class="hidden fixed bottom-20 max-h-96 sm:mx-0 z-50 sm:bottom-auto sm:top-36 sm:w-96 sm:mt-2 left-2 right-2 sm:left-16 p-3 bg-zinc-50 dark:bg-zinc-800 text-black dark:text-white rounded-md sm:rounded-bl-none sm:rounded-tl-none border-2 sm:border-l-0 border-zinc-300 dark:border-zinc-700 overflow-auto">
-    <div class="w-full">
-        <div class="ml-2 select-none">
-            <svg class="w-8 h-8 inline" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-                <path
-                    d="M256 32V51.2C329 66.03 384 130.6 384 208V226.8C384 273.9 401.3 319.2 432.5 354.4L439.9 362.7C448.3 372.2 450.4 385.6 445.2 397.1C440 408.6 428.6 416 416 416H32C19.4 416 7.971 408.6 2.809 397.1C-2.353 385.6-.2883 372.2 8.084 362.7L15.5 354.4C46.74 319.2 64 273.9 64 226.8V208C64 130.6 118.1 66.03 192 51.2V32C192 14.33 206.3 0 224 0C241.7 0 256 14.33 256 32H256zM224 512C207 512 190.7 505.3 178.7 493.3C166.7 481.3 160 464.1 160 448H288C288 464.1 281.3 481.3 269.3 493.3C257.3 505.3 240.1 512 224 512z" />
-            </svg>
-            <div class="inline ml-2 leading-6 align-middle text-2xl">Notifications</div>
-        </div>
-        <div>
-            @for ($i = 0; $i < 20; $i++)
-                <div class="mt-4 w-full h-12 flex flex-row align-middle">
-                    <img class="rounded-full w-12 h-12 inline-block select-none border border-gray-900 dark:border-gray-100"
-                        src="https://via.placeholder.com/640" alt="Profile Picture">
-                    <div class="inline-block h-12 grow ml-2 text-zinc-900 dark:text-zinc-100">
-                        <div class="w-full break-normal h-6 leading-6 text-ellipsis overflow-hidden select-none">
-                            Person's Name
-                        </div>
-                        <div
-                            class="w-full break-normal text-xs text-zinc-700 dark:text-zinc-300 h-6 leading-3 text-ellipsis overflow-hidden select-none">
-                            Something happened to something and this is a notification for it.
-                        </div>
-                    </div>
-                </div>
-            @endfor
-        </div>
-    </div>
-</div>

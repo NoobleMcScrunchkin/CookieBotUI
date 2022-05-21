@@ -209,7 +209,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'AppHelper' => App\Helpers\AppHelper::class,
     ])->toArray(),
 
     'api_base_url' => env('API_BASE_URL')

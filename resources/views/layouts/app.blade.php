@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -22,15 +21,16 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/3bcb40cd24.js" crossorigin="anonymous"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.12/dist/js/splide.min.js"></script>
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-zinc-200 dark:bg-zinc-900">
-        <div class="flex sm:flex-row flex-col-reverse min-h-screen">
+    <div class="min-h-screen bg-zinc-300 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100">
+        <div class="flex flex-row min-h-screen">
             @include('layouts.sidebar')
-            <main class="grow mt-4 sm:mt-0">
+            <main class="grow overflow-x-hidden overflow-y-auto">
                 <!-- Page Content -->
                 @yield('content')
             </main>
