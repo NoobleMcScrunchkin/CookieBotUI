@@ -12,7 +12,7 @@
                                 <img class="aspect-square w-12 rounded-full"
                                     src="{{ $messageObj['member']['displayAvatarURL'] }}" alt="{{ $messageObj['member']['displayName'] }}">
                             </div>
-                            <div class="flex flex-col flex-grow pl-2">
+                            <div class="flex flex-col w-[calc(100%-3rem)] pl-2">
                                 <div><strong>{{ $messageObj['member']['displayName'] }}</strong></div>
                                 <div>{{ $messageObj['message']['cleanContent'] }}</div>
                             </div>
