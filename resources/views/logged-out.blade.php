@@ -1,4 +1,4 @@
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -19,19 +19,20 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/3bcb40cd24.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
 </head>
 
-<body class="font-sans antialiased">
-    <div class="min-h-screen bg-zinc-300 dark:bg-zinc-700 text-zinc-900 dark:text-zinc-100">
-        <div class="flex flex-row min-h-screen">
-            @include('layouts.sidebar')
-            <main class="grow overflow-x-hidden overflow-y-auto">
-                <!-- Page Content -->
-                @yield('content')
-            </main>
+<body class="antialiased">
+    <div
+        class="relative flex items-top justify-center min-h-screen bg-zinc-100 dark:bg-zinc-900 sm:items-center sm:pt-0">
+        <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center pt-8 sm:justify-start sm:pt-0">
+                <div class="px-4 text-2xl text-gray-500">Logged out</div>
+                <div class="ml-4 text-sm text-gray-500"><a href="{{ route('index') }}">Login</a></div>
+            </div>
         </div>
     </div>
+
+
 </body>
 
 </html>

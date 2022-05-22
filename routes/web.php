@@ -23,3 +23,5 @@ Route::middleware(['cors', 'auth'])->group(function() {
         Route::get('/{channel}', [DashboardController::class, 'guildChannel'])->name('guild.channel');
     });
 });
+
+Route::get('/loggedout', [DashboardController::class, 'loggedOut'])->name('logged-out');

@@ -35,4 +35,9 @@ class DashboardController extends Controller
 
         return view('guild.channel', ['guild' => $guild, 'channel' => $channel, 'messages' => $messages]);
     }
+
+    public function loggedOut()
+    {
+        return view('logged-out');
+    }
 }
