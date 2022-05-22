@@ -55,7 +55,7 @@
         const guild = "{{ $guild['id'] }}";
         const channel = "{{ $channel['id'] }}";
 
-        const url = "ws://" + new URL(window.location.href).hostname + ":5000";
+        const url = "ws{{ env('WS_SSL', false) == true ? 's' : '' }}://" + new URL(window.location.href).hostname + ":5000";
         webSocket = io(url);
 
         webSocket.on('connect', () => {
