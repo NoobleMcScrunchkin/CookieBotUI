@@ -632,6 +632,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .overflow-x-hidden {
   overflow-x: hidden;
 }
+.text-ellipsis {
+  text-overflow: ellipsis;
+}
+.whitespace-nowrap {
+  white-space: nowrap;
+}
 .rounded {
   border-radius: 0.25rem;
 }

@@ -18,7 +18,7 @@
                             class="w-full h-full rounded-lg">
                     @else
                         <div
-                            class="w-full h-full rounded-lg text-center text-3xl flex justify-center align-center flex-col dark:bg-zinc-700 bg-zinc-300 text-zinc-800 dark:text-zinc-200">
+                            class="w-full h-full rounded-lg text-center text-3xl flex justify-center align-center flex-col dark:bg-zinc-700 bg-zinc-300 text-zinc-800 dark:text-zinc-200 overflow-hidden whitespace-nowrap text-ellipsis">
                             <strong>{{ AppHelper::acronym($member['displayName']) }}</strong>
                         </div>
                     @endif
