@@ -23,7 +23,7 @@
                         </div>
                     @endif
                 </div>
-                <div class="h-8 flex-grow pl-2">
+                <div class="h-8 w-[calc(100%-2rem)] pl-2">
                     {{ $member['displayName'] }}
                 </div>
             </li>
