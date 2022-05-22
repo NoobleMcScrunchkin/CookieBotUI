@@ -3,7 +3,7 @@
 @section('content')
     <div class="flex flex-row w-full h-screen overflow-y-auto">
         @include('layouts.guild-channels')
-        <div class="h-screen flex-grow flex flex-col">
+        <div class="h-screen w-[calc(100%-28rem)] flex flex-col">
             <div class="flex-grow h-[calc(100vh-4rem)] w-full pl-3">
                 <ul id="messageContainer" class="flex flex-col h-full w-full overflow-y-auto">
                     @foreach (array_reverse($messages) as $messageObj)

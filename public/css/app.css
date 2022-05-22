@@ -543,6 +543,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-\[calc\(100\%-3rem\)\] {
   width: calc(100% - 3rem);
 }
+.w-\[calc\(100\%-28rem\)\] {
+  width: calc(100% - 28rem);
+}
 .max-w-7xl {
   max-width: 80rem;
 }
