@@ -30,6 +30,8 @@ class DashboardController extends Controller
             }
         }
 
-        return view('guild.channel', ['guild' => $guild, 'channel' => $channel]);
+        $messages = BotInterface::getMessages($guildid, $channelid);
+
+        return view('guild.channel', ['guild' => $guild, 'channel' => $channel, 'messages' => $messages]);
     }
 }

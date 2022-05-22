@@ -3,9 +3,22 @@
 @section('content')
     <div class="flex flex-row w-full h-screen overflow-y-auto">
         @include('layouts.guild-channels')
-        <div class="h-full flex-grow flex flex-col">
-            <div class="flex-grow w-full py-4 px-3">
-                {{ $channel['name'] }}
+        <div class="h-screen flex-grow flex flex-col">
+            <div class="flex-grow h-[calc(100vh-4rem)] w-full pl-3">
+                <ul id="messageContainer" class="flex flex-col h-full w-full overflow-y-auto">
+                    @foreach (array_reverse($messages) as $messageObj)
+                        <li class="flex flex-row border-t-2 border-zinc-400 dark:border-zinc-600 py-2">
+                            <div class="w-12">
+                                <img class="aspect-square w-12 rounded-full"
+                                    src="{{ $messageObj['member']['displayAvatarURL'] }}" alt="{{ $messageObj['member']['displayName'] }}">
+                            </div>
+                            <div class="flex flex-col flex-grow pl-2">
+                                <div><strong>{{ $messageObj['member']['displayName'] }}</strong></div>
+                                <div>{{ $messageObj['message']['cleanContent'] }}</div>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
             <div class="h-16 w-full bg-zinc-200 dark:bg-zinc-800 border-t-2 border-zinc-400 dark:border-zinc-600 p-2">
                 <input
@@ -35,5 +48,61 @@
                 }
             }
         });
+
+        let messageContainer = document.getElementById("messageContainer");
+        messageContainer.scrollTop = messageContainer.scrollHeight;
+
+        const guild = "{{ $guild['id'] }}";
+        const channel = "{{ $channel['id'] }}";
+
+        const url = "ws://" + new URL(window.location.href).hostname + ":5000";
+        webSocket = io(url);
+
+        webSocket.on('connect', () => {
+            console.log(`WebSocket connected to ${url}: ${webSocket.id}`);
+
+            webSocket.emit('setChannel', {
+                "guild": guild,
+                "channel": channel,
+            });
+        });
+
+        webSocket.on('disconnect', () => {
+            webSocket.connect();
+        });
+
+        webSocket.on('newMessage', message => {
+            let listItem = document.createElement('li');
+            listItem.className = 'flex flex-row border-t-2 border-zinc-400 dark:border-zinc-600 py-2';
+
+            profileDiv = document.createElement('div');
+            profileDiv.className = "w-12";
+
+            profileImg = document.createElement('img');
+            profileImg.className = "aspect-square w-12 rounded-full";
+            profileImg.src = message.member.displayAvatarURL;
+            profileImg.alt = message.member.displayName;
+
+            contentDiv = document.createElement('div');
+            contentDiv.className = "flex flex-col flex-grow pl-2";
+
+            nameDiv = document.createElement('div');
+            nameStrong = document.createElement('strong');
+            nameStrong.textContent = message.member.displayName;
+
+            messageDiv = document.createElement('div');
+            messageDiv.textContent = message.message.cleanContent;
+
+            nameDiv.appendChild(nameStrong);
+            contentDiv.appendChild(nameDiv);
+            contentDiv.appendChild(messageDiv);
+            profileDiv.appendChild(profileImg);
+            listItem.appendChild(profileDiv);
+            listItem.appendChild(contentDiv);
+            messageContainer.appendChild(listItem);
+
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+        });
+
     </script>
 @endsection

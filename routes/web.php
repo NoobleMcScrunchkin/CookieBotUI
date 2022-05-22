@@ -15,12 +15,11 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->name('index');
+Route::middleware(['cors'])->group(function() {
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
 
-Route::prefix('/{guild}')->group(function () {
-    Route::get('/settings', [DashboardController::class, 'guildSettings'])->name('guild.settings');
-    Route::get('/{channel}', [DashboardController::class, 'guildChannel'])->name('guild.channel');
+    Route::prefix('/{guild}')->group(function () {
+        Route::get('/settings', [DashboardController::class, 'guildSettings'])->name('guild.settings');
+        Route::get('/{channel}', [DashboardController::class, 'guildChannel'])->name('guild.channel');
+    });
 });
-
-Route::get('/test', [APIController::class, 'test'])->name('test');
-Route::get('/test2', [APIController::class, 'test2'])->name('test2');
