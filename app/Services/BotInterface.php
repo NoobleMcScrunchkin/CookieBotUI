@@ -10,9 +10,11 @@ class BotInterface
     {
     }
 
-    public static function getGuilds()
+    public static function getGuilds($userid)
     {
-        $response = Http::get(config('app.api_base_url') . 'guilds');
+        $response = Http::get(config('app.api_base_url') . 'guilds', [
+            'userid' => $userid,
+        ]);
         $res = $response->json();
 
         if (!$res['success']) {
@@ -23,9 +25,12 @@ class BotInterface
         return $guilds;
     }
 
-    public static function getGuild($guild)
+    public static function getGuild($userid, $guild)
     {
-        $response = Http::get(config('app.api_base_url') . 'guild', ['guildid' => $guild]);
+        $response = Http::get(config('app.api_base_url') . 'guild', [
+            'userid' => $userid,
+            'guildid' => $guild
+        ]);
         $res = $response->json();
 
         if (!$res['success']) {
@@ -36,9 +41,13 @@ class BotInterface
         return $guild;
     }
 
-    public static function getMessages($guild, $channel)
+    public static function getMessages($userid, $guild, $channel)
     {
-        $response = Http::get(config('app.api_base_url') . 'messages', ['guildid' => $guild, 'channelid' => $channel]);
+        $response = Http::get(config('app.api_base_url') . 'messages', [
+            'userid' => $userid,
+            'guildid' => $guild,
+            'channelid' => $channel
+        ]);
         $res = $response->json();
 
         if (!$res['success']) {
@@ -49,9 +58,10 @@ class BotInterface
         return $messages;
     }
 
-    public static function sendMessage($guild, $channel, $message)
+    public static function sendMessage($userid, $guild, $channel, $message)
     {
         $response = Http::post(config('app.api_base_url') . 'send-msg', [
+            'userid' => $userid,
             'guild' => $guild,
             'channel' => $channel,
             'message' => $message

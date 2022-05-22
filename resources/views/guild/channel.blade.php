@@ -39,11 +39,12 @@
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
+                            "userid": "{{ Auth::id() }}",
                             "guild": "{{ $guild['id'] }}",
                             "channel": "{{ $channel['id'] }}",
                             "message": msgInp.value
                         })
-                    });
+                    }).then(res => res.json()).then(data => console.log(data));
                     msgInp.value = "";
                 }
             }

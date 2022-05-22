@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Services\BotInterface;
+use Illuminate\Support\Facades\Auth;
 
 class AppHelper
 {
@@ -20,6 +21,6 @@ class AppHelper
 
     public static function getGuilds()
     {
-        return BotInterface::getGuilds();
+        return BotInterface::getGuilds(Auth::id());
     }
 }

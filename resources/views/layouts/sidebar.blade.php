@@ -1,8 +1,6 @@
-<aside
-    class="w-16 min-h-screen sticky top-0 h-full border-r-2 border-zinc-400 dark:border-zinc-600"
+<aside class="w-16 h-screen sticky top-0 border-r-2 border-zinc-400 dark:border-zinc-600 flex flex-col"
     aria-label="Sidebar">
-    <div
-        class="overflow-y-auto py-4 px-3 bg-zinc-100 rounded rounded-tl-none rounded-bl-none dark:bg-zinc-900 min-h-screen">
+    <div class="overflow-y-auto py-4 px-3 bg-zinc-100 dark:bg-zinc-900 flex-grow noscrollbar">
         <ul class="space-y-2 block">
             <li class="float-none">
                 <a href="{{ route('index') }}"
@@ -25,7 +23,8 @@
                                 <img src="{{ $sideBarGuild['icon'] }}" alt="{{ $sideBarGuild['name'] }}"
                                     class="w-full h-full rounded-lg">
                             @else
-                                <div class="w-full h-full rounded-lg text-center text-xl flex justify-center align-center flex-col">
+                                <div
+                                    class="w-full h-full rounded-lg text-center text-xl flex justify-center align-center flex-col">
                                     <strong>{{ AppHelper::acronym($sideBarGuild['name']) }}</strong>
                                 </div>
                             @endif
@@ -35,4 +34,23 @@
             @endforeach
         </ul>
     </div>
+    <div class="py-4 px-3 bg-zinc-100 dark:bg-zinc-900">
+        <ul>
+            <li class="float-none">
+                <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                    class="flex items-center p-2 text-base font-normal text-zinc-500 rounded-lg dark:bg-zinc-700 bg-zinc-300 text-zinc-800 dark:text-zinc-200 hover:text-zinc-900 hover:bg-zinc-400 dark:hover:text-zinc-100 dark:hover:bg-zinc-600">
+                    <svg class="flex-shrink-0 w-6 h-6 transition duration-75" xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor" viewBox="0 0 512 512">
+                        <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
+                        <path
+                            d="M160 416H96c-17.67 0-32-14.33-32-32V128c0-17.67 14.33-32 32-32h64c17.67 0 32-14.33 32-32S177.7 32 160 32H96C42.98 32 0 74.98 0 128v256c0 53.02 42.98 96 96 96h64c17.67 0 32-14.33 32-32S177.7 416 160 416zM502.6 233.4l-128-128c-12.51-12.51-32.76-12.49-45.25 0c-12.5 12.5-12.5 32.75 0 45.25L402.8 224H192C174.3 224 160 238.3 160 256s14.31 32 32 32h210.8l-73.38 73.38c-12.5 12.5-12.5 32.75 0 45.25s32.75 12.5 45.25 0l128-128C515.1 266.1 515.1 245.9 502.6 233.4z" />
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
 </aside>

@@ -15,7 +15,7 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::middleware(['cors'])->group(function() {
+Route::middleware(['cors', 'auth'])->group(function() {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     Route::prefix('/{guild}')->group(function () {
