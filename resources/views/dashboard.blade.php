@@ -3,9 +3,16 @@
 @section('content')
     <div class="bg-zinc-200 dark:bg-zinc-800 w-full h-full">
         <div class="max-w-7xl mx-auto px-8">
-            <ul class="bg-zinc-200 dark:bg-zinc-800 py-4 px-4 rounded">
+            <ul class="bg-zinc-200 dark:bg-zinc-800 py-4 rounded">
                 <li class="w-full flex flex-row py-2 text-zinc-700 dark:text-zinc-300">
-                    <strong>Guilds - {{ count(AppHelper::getGuilds()) }}</strong>
+                    <div class="flex-grow">
+                        <strong>Guilds - {{ count(AppHelper::getGuilds()) }}</strong>
+                    </div>
+                    <div>
+                        <a class="mt-4 px-3 p-1 rounded-lg bg-green-500 text-white inline"
+                            href="https://discord.com/api/oauth2/authorize?client_id={{ env('LARASCORD_CLIENT_ID', '') }}&permissions=8&redirect_uri={{ urlencode(env('APP_URL') . '/' . env('LARASCORD_PREFIX') . '/callback') }}&response_type=code&scope=guilds.members.read%20guilds%20bot%20messages.read%20applications.commands%20identify%20email">Invite
+                            to Server</a>
+                    </div>
                 </li>
                 @foreach (AppHelper::getGuilds() as $guild)
                     <a href="{{ route('guild.settings', ['guild' => $guild['id']]) }}" class="block">
