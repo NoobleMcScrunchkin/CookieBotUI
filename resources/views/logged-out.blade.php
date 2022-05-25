@@ -26,8 +26,8 @@
         class="relative flex items-top justify-center min-h-screen bg-zinc-100 dark:bg-zinc-900 sm:items-center sm:pt-0">
         <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
             <div class="flex flex-col items-center pt-8 sm:justify-start sm:pt-0">
-                <div class="px-4 text-2xl text-gray-500">Logged out</div>
-                <div class="ml-4 text-sm text-gray-500"><a href="{{ route('index') }}">Login</a></div>
+                <div class="text-2xl text-gray-500">Logged out</div>
+                <div class="text-sm text-gray-500"><a href="{{ route('index') }}">Login</a></div>
             </div>
         </div>
     </div>
