@@ -10,7 +10,7 @@
                         <li class="flex flex-row border-t-2 border-zinc-400 dark:border-zinc-600 py-2">
                             <div class="w-12">
                                 <img class="aspect-square w-12 rounded-full"
-                                    src="{{ $messageObj['member']['displayAvatarURL'] }}" alt="{{ $messageObj['member']['displayName'] }}">
+                                    src="{{ $messageObj['member']['displayAvatarURL'] ?? asset('img/noavatar.png') }}" alt="{{ $messageObj['member']['displayName'] }}">
                             </div>
                             <div class="flex flex-col w-[calc(100%-3rem)] pl-2">
                                 <div><strong>{{ $messageObj['member']['displayName'] }}</strong></div>
